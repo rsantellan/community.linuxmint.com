@@ -3,7 +3,7 @@
     <div class="art-Post-body">
 <div class="art-Post-inner">
     <h2 class="art-PostHeaderIcon-wrapper">
-        <span class="art-PostHeader"><img src="/img/icons/stats.png" align="absmiddle"/>&nbsp;Welcome to the Community!</span>
+        <span class="art-PostHeader"><img src="<?php echo base_url();?>img/icons/stats.png" align="absmiddle"/>&nbsp;Welcome to the Community!</span>
     </h2>
     <div class="art-PostContent">
 

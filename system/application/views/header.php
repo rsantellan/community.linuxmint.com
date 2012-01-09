@@ -9,17 +9,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
     <title><?if (isset($page_title)) { echo $page_title." - ";}?>Linux Mint Community</title>
 
-    <script type="text/javascript" src="/script.js"></script>
-    <script type="text/javascript" src="/ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="<?php echo base_url();?>script.js"></script>
+    <script type="text/javascript" src="<?php echo base_url();?>ckeditor/ckeditor.js"></script>
 
 
-    <link rel="stylesheet" href="/style.css" type="text/css" media="screen" />
-    <link rel="stylesheet" href="/menu.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="<?php echo base_url();?>style.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="<?php echo base_url();?>menu.css" type="text/css" media="screen" />
     <!--[if IE 6]><link rel="stylesheet" href="/style.ie6.css" type="text/css" media="screen" /><![endif]-->
     <!--[if IE 7]><link rel="stylesheet" href="/style.ie7.css" type="text/css" media="screen" /><![endif]-->
 
-    <link rel="icon" href="/images/favicon.ico" type="image/x-icon" />
-    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="<?php echo base_url();?>images/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="<?php echo base_url();?>images/favicon.ico" type="image/x-icon" />
 
 </head>
 <body>
