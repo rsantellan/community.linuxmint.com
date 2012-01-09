@@ -1,0 +1,15 @@
+This is the source code for the community website. 
+
+Compared to the live website, it's missing the following:
+
+Missing content:
+
+    img/screenshots
+    uploads/screenshots
+    uploads/avatars
+    
+    database data
+    
+Missing configuration:
+
+    system/application/config/database.php
