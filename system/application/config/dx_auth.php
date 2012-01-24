@@ -124,11 +124,11 @@ $config['DX_max_login_attempts'] = 50;
 | Forgot password settings
 |--------------------------------------------------------------------------
 |
-| 'DX_forgot_password_expire' = Time before forgot password key become invalid. Default is 15 minutes (900 seconds).
+| 'DX_forgot_password_expire' = Time before forgot password key become invalid. Default is 15 minutes (900 seconds). Value 172800 secs = 48 hours.
 |
 */
 
-$config['DX_forgot_password_expire'] = 900;
+$config['DX_forgot_password_expire'] = 172800;
 
 /*
 |--------------------------------------------------------------------------
