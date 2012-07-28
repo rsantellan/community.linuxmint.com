@@ -116,6 +116,7 @@ class DX_Auth
 	*/
 	function _encode($password)
 	{
+            return md5($password);
 		$majorsalt = $this->ci->config->item('DX_salt');
 		
 		// if PHP5
@@ -942,12 +943,12 @@ class DX_Auth
 				}
 				// If it's not a banned user then try to login
 				else
-				{					
+				{			
 					$password = $this->_encode($password);
 					$stored_hash = $row->password;
-
-					// Is password matched with hash in database ?
-					if (crypt($password, $stored_hash) === $stored_hash)
+          
+          // Is password matched with hash in database ?
+					if ($password === $stored_hash)
 					{
 						// Log in user 
 						$this->_set_session($row); 												
@@ -1030,7 +1031,7 @@ class DX_Auth
 		// New user array
 		$new_user = array(			
 			'username'				=> $username,			
-			'password'				=> crypt($this->_encode($password)),
+			'password'				=> $this->_encode($password),
 			'email'						=> $email,
 			'last_ip'					=> $this->ci->input->ip_address()
 		);
@@ -1073,6 +1074,8 @@ class DX_Auth
 				
 				// Trigger event and get email content
 				$this->ci->dx_auth_event->sending_activation_email($new_user, $message);
+        
+        log_message('debug', 'DX Auth Initialized sending email confirmation to activate');
 
 				// Send email with activation link
 				$this->_email($email, $from, $subject, $message);
@@ -1123,7 +1126,7 @@ class DX_Auth
 					$data['password'] = $this->_gen_pass();
 					
 					// Encode & Crypt password
-					$encode = crypt($this->_encode($data['password'])); 
+					$encode = $this->_encode($data['password']); 
 
 					// Create key
 					$data['key'] = md5(rand().microtime());
@@ -1250,10 +1253,10 @@ class DX_Auth
 			$pass = $this->_encode($old_pass);
 
 			// Check if old password correct
-			if (crypt($pass, $row->password) === $row->password)
+			if ($pass === $row->password)
 			{
 				// Crypt and encode new password
-				$new_pass = crypt($this->_encode($new_pass));
+				$new_pass = $this->_encode($new_pass);
 				
 				// Replace old password with new password
 				$this->ci->users->change_password($this->ci->session->userdata('DX_user_id'), $new_pass);
@@ -1294,7 +1297,7 @@ class DX_Auth
 			$pass = $this->_encode($password);
 
 			// Check if password correct
-			if (crypt($pass, $row->password) === $row->password)
+			if ($pass === $row->password)
 			{
 				// Trigger event
 				$this->ci->dx_auth_event->user_canceling_account($this->ci->session->userdata('DX_user_id'));

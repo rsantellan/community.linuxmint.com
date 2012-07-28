@@ -11,7 +11,7 @@
 |	http://example.com/
 |
 */
-$config['base_url']	= "http://community.linuxmint.com/";
+$config['base_url']	= "http://mint.local/";
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +23,7 @@ $config['base_url']	= "http://community.linuxmint.com/";
 | variable so that it is blank.
 |
 */
-$config['index_page'] = "";
+$config['index_page'] = "index.php";
 
 /*
 |--------------------------------------------------------------------------
@@ -173,7 +173,7 @@ $config['directory_trigger'] 	= 'd'; // experimental not currently in use
 | your log files will fill up very fast.
 |
 */
-$config['log_threshold'] = 0;
+$config['log_threshold'] = 4;
 
 /*
 |--------------------------------------------------------------------------
@@ -184,7 +184,7 @@ $config['log_threshold'] = 0;
 | system/logs/ folder.  Use a full server path with trailing slash.
 |
 */
-$config['log_path'] = '';
+$config['log_path'] = '/home/rodrigo/proyectos/community.linuxmint.com/system/logs/';
 
 /*
 |--------------------------------------------------------------------------
