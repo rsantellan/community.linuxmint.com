@@ -12,6 +12,11 @@ echo form_open_multipart('user/save_details');
 ?>
 
 <img src="<?=$avatar?>" style="float: left"/>
+<?php if(substr_count($avatar, 'default_avatar') == 0): ?>
+  <a href="<?php echo site_url('user/deleteAvatar');?>" onclick="return confirm('Are you sure do you want to delete avatar?')">
+    <img src="/images/delete.png" style="float: left"/>
+  </a>
+<?php endif;?>
 <table>
 <tr><th>Avatar</th><td><input type="file" name="avatar" size="20"> (.jpg, 100x100px, 100KB max) </td></tr>
 

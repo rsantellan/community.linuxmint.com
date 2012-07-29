@@ -373,6 +373,18 @@ class User extends Controller{
 		}
 	}
 
+  function deleteAvatar()
+  {
+    $this->security->restrict_to_registered_users();
+
+		$user_id = $this->dx_auth->get_user_id();
+    if (file_exists(FCPATH.'uploads/avatars/'.$user_id.".jpg"))
+    {
+      @unlink(FCPATH.'uploads/avatars/'.$user_id.".jpg");
+    }
+		redirect('user/change_details');
+  }
+
 	function save_details()
 	{
 		$this->security->restrict_to_registered_users();
@@ -395,35 +407,45 @@ class User extends Controller{
 				'edition' => intval($_POST["edition"]),
 				'disable_emails' => $disable_emails
                 );
-
-		$config['upload_path'] = FCPATH.'uploads/avatars/';
-		$config['file_name'] = "$user_id";
-		$config['overwrite'] = TRUE;
-		$config['allowed_types'] = 'jpg';
-		$config['is_image'] = TRUE;
-		$config['max_size']	= '100';
-		$config['max_width']  = '100';
-		$config['max_height']  = '100';
+    
+    /*
+     * 
+     * Change the order of saving the data 
+     * to improve the errors of uploading files
+     * 
+     */ 
+    $this->db->where('id', $user_id);
+    $this->db->update('users', $data);
 		
-		$this->load->library('upload', $config);
-	
-		if (!$this->upload->do_upload("avatar"))
-		{
-			$upload_data = $this->upload->data();
-			if ($upload_data['orig_name'] != "") {
-				$data["error"] = $this->upload->display_errors();		
-				$this->load->view('header');
-				$this->load->view('menu');
-				$this->load->view('left');
-				$this->load->view('home/upload_failure', $data);
-				$this->load->view('footer');
-				return;
-			}
-		}	
+    //Check if the files exists
+    if(isset($_FILES['avatar']) && $_FILES['avatar']["error"] != 4)
+    {
+      $config['upload_path'] = FCPATH.'uploads/avatars/';
+      $config['file_name'] = "$user_id";
+      $config['overwrite'] = TRUE;
+      $config['allowed_types'] = 'jpg';
+      $config['is_image'] = TRUE;
+      $config['max_size']	= '100';
+      $config['max_width']  = '100';
+      $config['max_height']  = '100';
+      
+      $this->load->library('upload', $config);
 
-                $this->db->where('id', $user_id);
-                $this->db->update('users', $data);
-				
+      if (!$this->upload->do_upload("avatar"))
+      {
+        $upload_data = $this->upload->data();
+        if ($upload_data['orig_name'] != "") 
+        {
+        }
+        $data["error"] = $this->upload->display_errors();
+        $this->load->view('header');
+        $this->load->view('menu');
+        $this->load->view('left');
+        $this->load->view('home/upload_failure', $data);
+        $this->load->view('footer');
+        return;
+      }  
+    }
 		$this->view(0);		
 	}
 
